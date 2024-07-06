@@ -1,0 +1,8 @@
+<!-- pages/friendDetail/friendDetail.wxml -->
+<view class="container">
+  <image class="avatar" src="{{friend.avatarUrl}}" mode="aspectFill"></image>
+  <view class="nickname">昵称: {{friend.nickName}}</view>
+  <view class="account-id">账户名: {{friend.account_id}}</view>
+  <button class="add-friend-button" bindtap="addFriend" wx:if="{{!isFriend}}">添加好友</button>
+  <text wx:if="{{isFriend}}">你们已经是好友了</text>
+</view>
