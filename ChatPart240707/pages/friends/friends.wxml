@@ -26,7 +26,7 @@
         </block>
 
         <block wx:if="{{item.userB_id==userInfo._id}}">
-            <view class="left" bindtap="viewFriendDetail" data-friend-id="{{item.userA_id}}">
+            <view class="left" bindtap="viewFriendDetail" data-friend-id="{{item.userA_id}}" data-friend-record="{{}}">
                 <image class="face" src="{{item.userA_avatarUrl}}"></image>    
                 <view class="nick-name">{{item.userA_account_id}}</view>
             </view>

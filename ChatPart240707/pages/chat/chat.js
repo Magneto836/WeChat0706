@@ -16,6 +16,7 @@ Page({
             recordId : options.id,
             userInfo : app.globalData.userInfo
         })
+        
         this.getChatList()
         this.getFriendInfo()
     },
@@ -87,9 +88,6 @@ Page({
         var that = this;
         wx.cloud.database().collection('chat_record').doc(that.data.recordId).watch({
             onChange: function(snapshot) {
-                
-                // console.log("123")
-                // console.log(snapshot.docs[0].record)
                 that.setData({
                     chatList : snapshot.docs[0].record
                 })

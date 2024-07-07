@@ -56,22 +56,27 @@ getMyfriend() {
       DB.or([
           {
               userA_id:that.data.userInfo._id,
+              userB_id:that.data.friendId,
               friend_status: true
           },
           {
+              userA_id:that.data.friendId,
               userB_id:that.data.userInfo._id,
               friend_status: true
           }
       ])
-  ).get({
-      success(res){
-          //console.log(res)
-          that.setData({
-              my_friends : res.data
-          })
-      }
+  ).watch({
+    onChange: (snapshot) => {
+      console.log("message L:    snapshot", snapshot)
+      this.setData({
+          my_friends: snapshot.docs
+      })
+      console.log("my_friends L:    ", this.data.my_friends)
+    },
+    onError: function(err) {
+      console.log(err)
+    }
   })
-
   
 },
   refreshdata(){
@@ -115,13 +120,6 @@ if (userInfo.friends.includes(this.data.friend._id)) {
 
 
 }
-
-
-
-
-
-
-
 
 
   },
@@ -189,9 +187,20 @@ if (userInfo.friends.includes(this.data.friend._id)) {
       }
   })
  }
-else if(buttonClicked == 2){
+else if (buttonClicked == 2) {
+  console.log("ButtonClicked2  Friend如下：")
+  this.getMyfriend();
+  setTimeout(() => {
+    console.log(that.data.my_friends)
+    wx.navigateTo({
+      url: '/pages/chat/chat?id=' + that.data.my_friends[0]._id
+    });
+  }, 1000); // 延迟 1 秒后访问 my_friends 数据
+}
+
+  /** 
   wx.switchTab({
-    url: '/pages/message/message',
+    url: '/pages/chat/chat',
     success: function(res) {
       console.log("跳转到消息页面成功");
     },
@@ -200,7 +209,7 @@ else if(buttonClicked == 2){
     }
   });
 }
-
+*/
 this.refreshdata()
 },
 });
