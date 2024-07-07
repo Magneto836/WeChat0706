@@ -1,0 +1,19 @@
+<!-- pages/friendDetail/friendDetail.wxml -->
+<view class="container">
+  <image class="avatar" src="{{friend.avatarUrl}}" mode="aspectFill"></image>
+  <view class="nickname">昵称: {{friend.nickName}}</view>
+  <view class="account-id">账户名: {{friend.account_id}}</view>
+  <view class="account-id">Button: {{buttonClicked}}</view>
+  <view class="right">
+    
+    
+    <button size="mini" bindtap="addFriend" disabled="{{buttonClicked==1}}">
+  {{buttonClicked === 2 ? '已是好友,私信' : (buttonClicked === 1 ? '已发送好友申请' : '添加好友')}}
+</button>
+
+  
+  
+  </view>
+  
+
+</view>
