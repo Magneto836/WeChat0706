@@ -14,6 +14,25 @@
   
   
   </view>
-  
 
+</view>
+
+
+<view class="container">
+  <block wx:for="{{order_list}}" wx:key="_id">
+
+    <view class="post">
+      <view class="header">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        <view class="info">
+          <text class="username">{{item.account_id}}</text>
+          <text class="timestamp">{{item.order_time}}</text>
+        </view>
+      </view>
+      <view class="contnet" >
+        <text>{{item.contnet}}</text>
+      </view>
+    </view>
+
+  </block>
 </view>

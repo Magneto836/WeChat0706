@@ -4,6 +4,7 @@ const utils = require("../../utils/util");
 
 Page({
     data: {
+        userid:'',
         userInfo: null,
         user_list: [],
         new_friends: [],
@@ -147,9 +148,26 @@ Page({
         });
     },
     viewFriendDetail(e) {
+        const that = this;
         const friendId = e.currentTarget.dataset.friendId;
+        wx.cloud.database().collection('chat_user').where({
+          _id:friendId
+        }).get({
+          success(res){
+            if (res.data && res.data.length > 0) {
+              that.setData({
+                userid: res.data[0].account_id // 假设 res.data 是一个数组，取第一个元素的 _id
+              }, () => {
+                // 在 setData 完成后，打印 friendId
+                console.log(that.data.userid);
+              });
+            } else {
+              console.error('没有找到匹配的用户');
+            }
+          }
+        })
         wx.navigateTo({
-            url: '/pages/friendDetail/friendDetail?friendId=' + friendId
+            url: '/pages/friendDetail/friendDetail?friendId=' + friendId+'&userid='+that.data.userid
         });
     }
 });

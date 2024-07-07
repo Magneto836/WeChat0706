@@ -1,6 +1,8 @@
 // pages/friendDetail/friendDetail.js
 const app = getApp();
 const utils = require("../../utils/util")
+const order = wx.cloud.database().collection('order_record')
+
 Page({
   data: {
     friend: {
@@ -13,6 +15,7 @@ Page({
   },
   onShow(){
     this.refreshdata();
+    this.getUserOrder();
   },
   getNewFriends() {
     this.setData({
@@ -126,6 +129,9 @@ if (userInfo.friends.includes(this.data.friend._id)) {
   onLoad(options) {
     const friendId = options.friendId;
     this.getFriendDetail(friendId);
+    this.setData({
+      userid:options.userid
+    })
   },
   getFriendDetail(friendId) {
     const db = wx.cloud.database();
@@ -210,6 +216,24 @@ else if (buttonClicked == 2) {
   });
 }
 */
+
 this.refreshdata()
 },
+getUserOrder(){
+  const that =this;
+  order.where({
+    account_id : that.data.userid
+  }).get({
+    success(res) {  
+      that.setData({
+        order_list : res.data        
+      })     
+      console.log('order',that.data.order_list)  
+    },
+    fail(err){
+      console.log('error')
+    }
+  })
+}
+
 });
