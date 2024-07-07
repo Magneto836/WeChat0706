@@ -1,0 +1,16 @@
+
+<image class="circleImage" src="{{avatarUrl}}"></image>
+
+
+
+<view class="label-list">
+    <view class="label">微信名:</view>
+    <view class="label">{{userInfo.nickName}}</view>
+</view>
+<view class="label-list">
+    <text class="label" space="emsp"> 账号:</text>
+    <view class="label">{{userInfo.account_id}}</view>
+</view>
+
+<button bindtap="changeUserAvatar" class="buttonType">修改头像</button>
+<button bindtap="changeUser" class="buttonType">切换用户</button>
