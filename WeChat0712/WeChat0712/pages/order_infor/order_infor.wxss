@@ -1,0 +1,46 @@
+/* pages/order_infor/order_infor.wxss */
+.container {
+  padding: 20px;
+}
+
+.order-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username, .order-time {
+  font-size: 16px;
+  color: #333;
+}
+
+.order-content {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.content {
+  font-size: 16px;
+  color: #333;
+}
+
