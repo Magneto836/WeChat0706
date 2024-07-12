@@ -1,0 +1,16 @@
+<!--pages/order_infor/order_infor.wxml-->
+<view class="container">
+  <view class="order-info">
+    <image class="avatar" src="{{thisorder.avatarUrl}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="username">用户名: {{thisorder.account_id}}</text>
+      <text class="order-time">发布时间: {{thisorder.order_time}}</text>
+    </view>
+  </view>
+  <view class="order-content">
+    <text class="label">分区: {{thisorder.label}}</text>
+  </view>
+  <view class="order-content">
+    <text class="content">内容：{{thisorder.contnet}}</text>
+  </view>
+</view>
