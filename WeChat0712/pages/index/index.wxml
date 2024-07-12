@@ -1,0 +1,23 @@
+<view class="container">
+  <block wx:for="{{order_list}}" wx:key="_id">
+
+    <view class="post">
+      <view class="header">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" bind:tap="toUserinfor" data-userid="{{item.account_id}}"/>
+        <view class="info">
+          <text class="username">{{item.account_id}}</text>
+          <text class="timestamp">{{item.order_time}}</text>
+        </view>
+      </view>
+      <view class="contnet" bind:tap="toOrderinfor">
+        <text>{{item.contnet}}</text>
+      </view>
+      <view class="tags">
+        <text wx:for="{{item.tags}}" wx:key="{{index}}" class="tag">{{item}}</text>
+      </view>
+    </view>
+
+  </block>
+  <button class="post-button" bindtap="toOrder">发帖</button>
+</view>
+
