@@ -7,7 +7,9 @@ const chat=wx.cloud.database().collection('chat_user')
 Page({
 
   data: {
-    friendId:''
+    friendId:'',
+    search_input:'',
+    activeTab:'失物招领'
   },
   onShow: function () {
     this.getAllOrder()
@@ -15,20 +17,29 @@ Page({
     //this.toOrder()
   },
   onLoad() {
+    this.getAllOrder()
   },
 
   getAllOrder(){
     const that =this;
-    order.get({
+    order.where({
+      label:that.data.activeTab
+    }).orderBy('order_time', 'desc').get({
       success(res) {
         console.log("order_list",res.data)
         that.setData({
-          order_list : res.data        
+          order_list : res.data       
         })        
       },
     })
   },
-
+  getSearch(e){
+    const search = e.detail.value
+    console.log('输入',search)
+    this.setData({
+      search_input:search
+    })
+  },
   //发帖
   toOrder(){
     wx.navigateTo({
@@ -62,16 +73,47 @@ Page({
       }
     });
     setTimeout(() => {
-    wx.navigateTo({
-      url: '/pages/friendDetail/friendDetail?friendId=' + that.data.friendId+'&userid='+userid
-    });
+      wx.navigateTo({
+        url: '/pages/friendDetail/friendDetail?friendId=' + that.data.friendId+'&userid='+userid
+      });
     }, 1000); 
   },
   //帖子详情
-  toOrderinfor(){
+  toOrderinfor(e){
+    const order_id = e.currentTarget.dataset.order_id
+    console.log('这是什么',order_id)
     wx.navigateTo({
-      url: '/pages/order_infor/order_infor',
+      url: '/pages/order_infor/order_infor?order_id='+order_id,
     })
+  },
+
+
+
+  toSearch(){
+    if(!this.searchCherk()){
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/search/search?search_input='+this.data.search_input,
+    })
+  },
+  searchCherk(){
+    if(this.data.search_input.length < 1){
+      wx.showToast({
+        icon: 'error',
+        title: '搜索不能为空',
+      })
+      return false
+    }
+    return true;
+  },
+  setActiveTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    this.setData({
+      activeTab: tab
+    }, () => {
+      this.getAllOrder(); // 切换标签后重新获取数据
+    });
   }
 
 })

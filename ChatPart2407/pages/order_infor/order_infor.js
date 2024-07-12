@@ -8,26 +8,25 @@ Page({
   },
   
   onLoad(options) {
+    console.log('11',options)
     this.setData({
-      userid:options.userid
+      order_id:options.order_id
     })
-    console.log('userid',this.data.userid)
-    console.log('1')
+    console.log('order_id',this.data.order_id)
+
   },
   onShow:function(){
-    console.log('1')
-    this.getUserOrder()
-    
+    this.getThisOrder()
   },
-  getUserOrder(){
+  getThisOrder(){
     const that =this;
     order.where({
-      account_id:"wzc"
+      _id:that.data.order_id
     }).get({
       success(res) {  
-        console('成功打开数据库')
+        console.log('成功打开数据库,res:',res)
         that.setData({
-          order_list : res.data        
+          thisorder : res.data[0]       
         })       
       },
       fail(err){

@@ -1,0 +1,43 @@
+<!--pages/search/search.wxml-->
+<view class="container">
+  <!-- 标签切换 -->
+  <view class="tab-bar">
+    <view class="tab" data-tab="order" bindtap="setActiveTab" data-active="{{activeTab === 'order'}}">帖子</view>
+    <view class="tab" data-tab="user" bindtap="setActiveTab" data-active="{{activeTab === 'user'}}">用户</view>
+  </view>
+
+  <!-- 内容展示 -->
+  <view wx:if="{{activeTab === 'order'}}">
+    <block wx:for="{{order_list}}" wx:key="_id">
+      <view class="post">
+        <view class="header">
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" bindtap="toUserinfor" data-userid="{{item.account_id}}" />
+          <view class="info">
+            <text class="username">{{item.account_id}}</text>
+            <text class="timestamp">{{item.order_time}}</text>
+          </view>
+        </view>
+        <view class="content" bindtap="toOrderinfor" data-order_id="{{item._id}}">
+          <text>{{item.contnet}}</text>
+        </view>
+        <view class="tags">
+          <text wx:for="{{item.tags}}" wx:key="{{index}}" class="tag">{{item}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view wx:if="{{activeTab === 'user'}}">
+    <block wx:for="{{user_list}}" wx:key="_id">
+      <view class="user">
+        <view class="header">
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" bindtap="toUserinfor" data-userid="{{item.account_id}}" />
+          <view class="info">
+            <text class="username">{{item.account_id}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

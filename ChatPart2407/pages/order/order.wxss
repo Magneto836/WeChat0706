@@ -16,6 +16,10 @@
   border-radius: 10rpx;
   resize: none; /* 防止用户手动调整大小 */
 }
+.tip{
+  font-size: 16px;
+  color: #666666;
+}
 
 .section {
   display: flex;

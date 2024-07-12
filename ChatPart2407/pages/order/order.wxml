@@ -1,6 +1,8 @@
 <!--pages/order/order.wxml-->
 <view class="textarea-content">
+  <text class="tip">已输入{{wordlen}}</text>
   <textarea placeholder="输入发帖内容" bindinput="getOrderContent"/>
+  <text class="tip">输入内容在5到100之间</text>
 </view>
 <view class="section">
   <radio-group bindchange="getOrderLabel">
