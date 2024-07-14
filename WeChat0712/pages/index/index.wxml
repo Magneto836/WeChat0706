@@ -1,0 +1,38 @@
+<view class="container">
+  <!--输入框-->
+  <view class="search-bar">
+    <image class="search-icon" src="/images/icon/search.png" />
+    <input class="search-input" placeholder="输入搜索内容" bindinput="getSearch" />
+    <button class="search-button" bindtap="toSearch">搜索</button>
+  </view>
+  <!--分区-->
+  <view class="tab-bar">
+    <view class="tab" data-tab="失物招领" bindtap="setActiveTab" data-active="{{activeTab === '失物招领'}}">失物招领</view>
+    <view class="tab" data-tab="闲物出售" bindtap="setActiveTab" data-active="{{activeTab === '闲物出售'}}">闲物出售</view>
+    <view class="tab" data-tab="校园生活" bindtap="setActiveTab" data-active="{{activeTab === '校园生活'}}">校园生活</view>
+    <view class="tab" data-tab="学习讨论" bindtap="setActiveTab" data-active="{{activeTab === '学习讨论'}}">学习讨论</view>
+  </view>
+  <!--分区展示-->
+  <block wx:for="{{order_list}}" wx:key="_id">
+    <view class="post">
+      <view class="header">
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" bind:tap="toUserinfor" data-userid="{{item.account_id}}"/>
+        <view class="info">
+          <text class="username">{{item.account_id}}</text>
+          <text class="timestamp">{{item.order_time}}</text>
+        </view>
+      </view>
+      <view class="content" bind:tap="toOrderinfor" data-order_id="{{item._id}}">
+        <text>{{item.contnet}}</text>
+      </view>
+      <view class="tags">
+        <text wx:for="{{item.tags}}" wx:key="{{index}}" class="tag">{{item}}</text>
+      </view>
+    </view>
+
+  </block>
+  <text>没有更多了</text>
+  <!--发帖按钮-->
+  <button class="post-button" bindtap="toOrder">发帖</button>
+</view>
+

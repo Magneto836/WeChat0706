@@ -1,0 +1,34 @@
+
+
+
+<view class = "page-container">
+<view style="text-align: center;" >
+<text class = "WelcomeTextStyle" >\n\n欢迎来到校园墙系统\n\n如有账号请输入账号密码并点击登录按钮\n\n新用户请点击注册按钮进行注册\n\n\n\n</text>
+</view>
+
+<view class="label-list">
+    <view class="label">账号</view>
+    <view class="input-box">
+        <input type="text" placeholder="请输入账号" bindinput="getUserAccount"/>
+    </view>
+</view>
+
+<view class="label-list">
+    <view class="label">密码</view>
+    <view class="input-box">
+        <input type="{{passwordFieldType}}" placeholder="请输入密码" bindinput="getUserPassword"/>
+        
+        <button wx:if="{{condition}}"  type="default" bindtap="ShowPassword" class="ShowBtn">显示密码</button>
+        <button wx:else  type="default" bindtap="ShowPassword" class="ShowBtn">隐藏密码</button>
+        
+    </view>
+</view>
+
+
+
+
+<button bindtap="login" type="primary" class="buttonType">登录</button>
+
+<button type="default" bindtap="toRegister" class="buttonType">注册</button>
+
+</view>

@@ -1,0 +1,53 @@
+<view class="page-container">
+
+  <view style="display: flex; flex-direction: row; align-items: center;">
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="circleImage" src="{{avatarUrl}}"></image>
+  </button>
+  </view>
+
+  <view style="display: flex; flex-direction: row; align-items: center;">
+  <text class="label" space="emsp">微信名</text>
+  <input type="nickname" class="inputBox" placeholder="请授权微信名" bindinput="onNicknameInput"/>
+</view>
+
+
+  <block wx:if="{{userInfo && userInfo.nickName && userInfo.avatarUrl}}">
+    <view style="text-align: center;">
+      <text class="RegistHelpText">\n请输入昵称（即账号）和密码进行注册\n注：昵称长度不能超过10\n密码长度不能小于3，也不能大于15\n昵称中只能包含中英文和汉字，\n不能包含特殊字符与表情\n密码只能由英文和数字组成</text>
+    </view>
+
+    <view class="label-list">
+      <text class="label" space="emsp">昵称</text>
+      <view class="input-box">
+        <input type="text" class="inputBox" placeholder="请输入昵称" bindinput="getUserAccountId"/>
+      </view>
+    </view>
+
+    <view class="label-list">
+      <text class="label" space="emsp">密码</text>
+      <view class="input-box">
+        <input type="{{passwordFieldType1}}" class="inputBox" placeholder="请输入密码" bindinput="getUserPassword"/>
+       
+        <button wx:if="{{condition1}}"  type="default" bindtap="ShowPassword1" class="ShowBtn">显示密码</button>
+        <button wx:else  type="default" bindtap="ShowPassword1" class="ShowBtn">隐藏密码</button>
+      
+      </view>
+    </view>
+
+    <view class="label-list">
+      <text class="label">确认密码</text>
+      <view class="input-box">
+        <input type="{{passwordFieldType2}}" class="inputBox" placeholder="请确认密码" 
+        bindinput="ConfirmUserPassword"/>
+
+        <button wx:if="{{condition2}}"  type="default" bindtap="ShowPassword2" class="ShowBtn">显示密码</button>
+        <button wx:else  type="default" bindtap="ShowPassword2" class="ShowBtn">隐藏密码</button>
+
+      </view>
+    </view>
+  </block>
+
+  
+  <button wx:if="{{userInfo && userInfo.nickName && userInfo.avatarUrl}}" type="default" bindtap="register" class="buttonType">注册</button>
+</view>
