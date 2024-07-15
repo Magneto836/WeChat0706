@@ -9,34 +9,69 @@ Page({
       avatarUrl: '',
       nickname: '',
       account_id: '', 
-      _id: ''
+      _id: '',
     },
-    userid:'',
-    order_list:[],
-    buttonClicked : 0
+    userid: '',
+    order_list: [],
+    buttonClicked: 0,
+    pendingRequests: []
   },
-  onShow(){
+  onShow() {
     this.refreshdata();
     this.startInterval();
-
   },
   startInterval: function () {
     const that = this;
-    setInterval(function () {
+    // 保存定时器引用
+    this.refreshInterval = setInterval(function () {
       that.refreshdata();
     }, 3000);
+    // 启动缓存清理定时器
+    this.cacheClearInterval = setInterval(function () {
+      wx.clearStorage({
+        success() {
+          console.log('缓存已清理');
+        },
+        fail(err) {
+          console.error('清理缓存失败', err);
+        }
+      });
+    }, 8000); 
   },
   onLoad(options) {
-    this.startInterval();
     const friendId = options.friendId;
     const userid = options.userid; 
-    console.log('传参：',userid)
+    console.log('传参：', userid)
     this.setData({
-      userid:userid,
-      order_list:''     
-    })
+      userid: userid,
+      order_list: []     
+    });
     this.getUserOrder();
     this.getFriendDetail(friendId);
+  },
+  onHide() {
+    // 清除定时器
+    clearInterval(this.refreshInterval);
+    clearInterval(this.cacheClearInterval);
+    // 取消所有未完成的请求
+    this.abortPendingRequests();
+  },
+  onUnload() {
+    // 清除定时器
+    clearInterval(this.refreshInterval);
+    clearInterval(this.cacheClearInterval);
+    // 取消所有未完成的请求
+    this.abortPendingRequests();
+  },
+  abortPendingRequests() {
+    this.data.pendingRequests.forEach(request => {
+      if (request && typeof request.abort === 'function') {
+        request.abort();
+      }
+    });
+    this.setData({
+      pendingRequests: []
+    });
   },
   getNewFriends() {
     this.setData({

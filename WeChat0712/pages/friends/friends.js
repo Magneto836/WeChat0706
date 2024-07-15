@@ -23,7 +23,8 @@ Page({
         userInfo: null,
         user_list: [],
         new_friends: [],
-        my_friends: []
+        my_friends: [],
+        pendingRequests: [] // 初始化 pendingRequests 为空数组
     },
     onShow() {
       this.refreshData();
@@ -36,7 +37,18 @@ Page({
       this.refreshInterval = setInterval(function() {
         that.refreshData();
        
-      }, 5000); // 每2秒刷新一次
+      }, 5000); 
+      // 启动缓存清理定时器
+     this.data.cacheClearInterval = setInterval(function () {
+      wx.clearStorage({
+        success() {
+          console.log('缓存已清理');
+        },
+        fail(err) {
+          console.error('清理缓存失败', err);
+        }
+      });
+    }, 8000); 
     },
     refreshData() {
       console.log("现在开始刷新")
@@ -53,10 +65,12 @@ Page({
     },
     onHide() {
       clearInterval(this.refreshInterval);
+      clearInterval(this.data.cacheClearInterval); // 页面隐藏时清理缓存清理定时器
       this.abortPendingRequests(); // 页面隐藏时取消所有未完成的请求
     },
     onUnload() {
       clearInterval(this.refreshInterval);
+      clearInterval(this.data.cacheClearInterval); // 页面卸载时清理缓存清理定时器
       this.abortPendingRequests(); // 页面卸载时取消所有未完成的请求
     },
     // 获取所有用户信息
@@ -81,7 +95,9 @@ Page({
           request.abort();
         }
       });
-      this.data.pendingRequests = [];
+      this.setData({
+        pendingRequests: []
+      });
     },
     addFriend(e) {
         const index = e.currentTarget.dataset.index;
