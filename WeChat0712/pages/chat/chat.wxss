@@ -6,6 +6,7 @@
   align-items: center;
   position: fixed;
   bottom: 0;
+  width: 100%;  /* Ensure the pub-comment takes the full width */
 }
 
 .pub-left {
@@ -13,19 +14,26 @@
   color: #7f7f7f;
   border-radius: 50rpx;
   margin-right: 20rpx;
+  flex-grow: 1;  /* Allow the input container to grow */
 }
 
 .pub-input {
   padding: 10rpx 20rpx;
-  width: 500rpx;
+  width: 100%;  /* Make input take full width of its container */
+  box-sizing: border-box;  /* Include padding in the element's total width and height */
+  min-height: 80rpx; /* Minimum height to start with */
+  max-height: 300rpx; /* Maximum height the textarea can expand to */
+  overflow-y: auto; /* Allow scrolling if content exceeds max-height */
 }
 
 .pub-button {
   color: #7f7f7f;
+  margin-right: 30px;
   background-color: #ffffff;
   border: solid 1rpx #7f7f7f;
   border-radius: 50rpx;
   padding: 10rpx 20rpx;
+  white-space: nowrap;  /* Prevent button text from wrapping */
 }
 
 .pub-button-with-text {
@@ -81,7 +89,7 @@
   margin-left: 20rpx;
   margin-right: 20rpx;
   padding: 20rpx 20rpx;
-  background-color: rgb(229,229,229);
+  background-color: rgb(229, 229, 229);
   border-radius: 20rpx;
 }
 
