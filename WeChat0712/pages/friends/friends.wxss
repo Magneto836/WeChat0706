@@ -42,3 +42,12 @@
 page {
   background-color:#cbf1f5 ;
 }
+/* 对父容器应用 text-align: center */
+.containerss{
+  text-align: center;
+}
+
+/* 可选：调整 text 元素样式 */
+.ss {
+  display: inline-block; /* 确保 text 元素为行内块级元素 */
+}

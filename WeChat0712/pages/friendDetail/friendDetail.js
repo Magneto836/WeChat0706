@@ -17,17 +17,12 @@ Page({
   },
   onShow(){
     this.refreshdata();
-    this.startInterval();
+
 
   },
-  startInterval: function () {
-    const that = this;
-    setInterval(function () {
-      that.refreshdata();
-    }, 3000);
-  },
+
   onLoad(options) {
-    this.startInterval();
+
     const friendId = options.friendId;
     const userid = options.userid; 
     console.log('传参：',userid)

@@ -1,3 +1,7 @@
+<view class="containerss">
+  <text class="ss">点击 刷新状态 按钮查看是否有新的好友申请</text>
+</view>
+<button type="default" bindtap="bbb" class="buttonType">刷新状态</button>
 <view class="label">新朋友</view>
 <block wx:if="{{new_friends.length === 0}}">
   <view class="no-new-friends">没有新朋友</view>
@@ -55,3 +59,4 @@
        
     </view>
 </block>
+

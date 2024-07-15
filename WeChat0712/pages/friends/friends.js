@@ -27,16 +27,12 @@ Page({
     },
     onShow() {
       this.refreshData();
-      this.startAutoRefresh();
+     
         
         //console.log("我的好友目前有",this.data.my_friends)
     },
-    startAutoRefresh() {
-      var that = this ;
-      this.refreshInterval = setInterval(function() {
-        that.refreshData();
-       
-      }, 5000); // 每2秒刷新一次
+    bbb(){
+      this.refreshData()
     },
     refreshData() {
       console.log("现在开始刷新")
@@ -51,14 +47,7 @@ Page({
         userid:'',
       });
     },
-    onHide() {
-      clearInterval(this.refreshInterval);
-      this.abortPendingRequests(); // 页面隐藏时取消所有未完成的请求
-    },
-    onUnload() {
-      clearInterval(this.refreshInterval);
-      this.abortPendingRequests(); // 页面卸载时取消所有未完成的请求
-    },
+
     // 获取所有用户信息
     getAllUser() {
         const that = this;

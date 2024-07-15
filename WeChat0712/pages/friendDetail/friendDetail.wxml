@@ -8,16 +8,16 @@
   <view class="right">
     
     
-    <button size="mini" bindtap="addFriend" disabled="{{buttonClicked==1}}">
+    <button type="primary" size="mini" bindtap="addFriend" disabled="{{buttonClicked==1}}">
   {{buttonClicked === 2 ? '已是好友,私信' : (buttonClicked === 1 ? '已发送好友申请' : '添加好友')}}
 </button>
 
-  
+
   
   </view>
 
 </view>
-
+<button type="default" bindtap="RefreshStatus" class="buttonType">刷新好友状态</button>
 
 <view class="container">
   <block wx:for="{{order_list}}" wx:key="_id">
