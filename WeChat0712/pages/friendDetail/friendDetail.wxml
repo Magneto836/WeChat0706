@@ -17,7 +17,8 @@
   </view>
 
 </view>
-
+<button type="default" bindtap="RefreshStatus"
+  class="buttonType">刷新好友状态</button>
 
 <view class="container">
   <block wx:for="{{order_list}}" wx:key="_id">
@@ -36,8 +37,7 @@
     </view>
     
   </block>
-  <button type="default" bindtap="RefreshStatus"
-  class="buttonType">刷新好友状态</button>
+  
 
 
 </view>

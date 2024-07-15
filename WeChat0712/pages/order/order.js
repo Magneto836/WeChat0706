@@ -21,7 +21,8 @@ Page({
     })
   },
   getOrderContent(e){
-    const neirong = e.detail.value
+    let input = e.detail.value.trim()
+    const neirong = input
     const wordlen = neirong.length
     this.setData({
       neirong : neirong,
@@ -50,6 +51,10 @@ Page({
         order_time: utils.formatTime(new Date())
       },
       success(res){
+        wx.showToast({
+          icon: 'success',
+          title: '发布成功',
+        })
         wx.switchTab({
           url: '/pages/index/index',
         })

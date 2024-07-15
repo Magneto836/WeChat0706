@@ -10,7 +10,7 @@ Page({
     wx.hideHomeButton(); 
     if (app.globalData.userInfo!=null){
       wx.switchTab({
-        url: '/pages/message/message',
+        url: '/pages/index/index',
       })
     }
   },
@@ -75,7 +75,7 @@ Page({
                     app.globalData.userInfo = res.data[0]
                     wx.setStorageSync('userInfo', res.data[0])
                     wx.switchTab({
-                      url: '/pages/message/message',
+                      url: '/pages/index/index',
                       success(res){
                           wx.showToast({
                             icon:'success',

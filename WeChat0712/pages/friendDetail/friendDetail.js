@@ -83,10 +83,10 @@ getMyfriend() {
   ).watch({
     onChange: (snapshot) => {
       // console.log("message L:    snapshot", snapshot)
-      this.setData({
+      that.setData({
           my_friends: snapshot.docs
       })
-      // console.log("my_friends L:    ", this.data.my_friends)
+      console.log("my_friends L:    ", that.data.my_friends)
     },
     onError: function(err) {
       //console.log(err)
@@ -219,10 +219,19 @@ addFriend(e) {
   } else if (buttonClicked == 2) {
       //console.log("ButtonClicked2  Friend如下：")
       this.getMyfriend();
+      const arr = this.data.my_friends
+      var to_id =''
+      for(let i=0;i<arr.length;i++){
+        if(arr[i].userA_account_id==this.data.userid && arr[i].userB_account_id==that.data.userInfo.account_id){
+          to_id = arr[i]._id
+        }
+        if(arr[i].userA_account_id==that.data.userInfo.account_id && arr[i].userB_account_id==this.data.userid){
+          to_id = arr[i]._id
+        }
+      }
       setTimeout(() => {
-          //console.log(that.data.my_friends)
           wx.navigateTo({
-              url: '/pages/chat/chat?id=' + that.data.my_friends[0]._id
+              url: '/pages/chat/chat?id=' + to_id
           });
       }, 1000); // 延迟 1 秒后访问 my_friends 数据
   }

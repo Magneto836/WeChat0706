@@ -3,5 +3,6 @@
   "projectname": "ChatRoom",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.4.10"
 }

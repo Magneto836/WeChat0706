@@ -133,7 +133,14 @@ changeUser() {
       })
 
       console.log(app.globalData.userInfo.avatarUrl)
-
+      //修改订单库头像
+      wx.cloud.database().collection('order_record').where({
+        account_id : app.globalData.userInfo.account_id,
+      }).update({
+        data:{
+          avatarUrl : url
+        }
+      })
       // 更新数据集中用户的头像信息
       wx.cloud.database().collection('chat_user').doc(app.globalData.userInfo._id).update({
           data :{
@@ -154,7 +161,7 @@ changeUser() {
 
       this.onShow()
 
-    }
+      
 
-    
+    }
 })

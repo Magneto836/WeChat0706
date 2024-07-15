@@ -31,7 +31,7 @@
     </view>
 
   </block>
-
+  <text>没有更多了</text>
   <!--发帖按钮-->
   <button class="post-button" bindtap="toOrder">发帖</button>
 </view>
