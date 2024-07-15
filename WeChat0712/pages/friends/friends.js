@@ -36,7 +36,7 @@ Page({
       this.refreshInterval = setInterval(function() {
         that.refreshData();
        
-      }, 2000); // 每2秒刷新一次
+      }, 5000); // 每2秒刷新一次
     },
     refreshData() {
       console.log("现在开始刷新")
@@ -50,6 +50,14 @@ Page({
         userInfo: app.globalData.userInfo,
         userid:'',
       });
+    },
+    onHide() {
+      clearInterval(this.refreshInterval);
+      this.abortPendingRequests(); // 页面隐藏时取消所有未完成的请求
+    },
+    onUnload() {
+      clearInterval(this.refreshInterval);
+      this.abortPendingRequests(); // 页面卸载时取消所有未完成的请求
     },
     // 获取所有用户信息
     getAllUser() {
@@ -66,6 +74,14 @@ Page({
                 });
             }
         });
+    },
+    abortPendingRequests() {
+      this.data.pendingRequests.forEach(request => {
+        if (request && typeof request.abort === 'function') {
+          request.abort();
+        }
+      });
+      this.data.pendingRequests = [];
     },
     addFriend(e) {
         const index = e.currentTarget.dataset.index;

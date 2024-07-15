@@ -30,7 +30,7 @@
           <text class="timestamp">{{item.order_time}}</text>
         </view>
       </view>
-      <view class="contnet" >
+      <view class="content" bind:tap="toOrderinfor" data-order_id="{{item._id}}">
         <text>{{item.contnet}}</text>
       </view>
     </view>

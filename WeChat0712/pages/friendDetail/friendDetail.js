@@ -24,7 +24,7 @@ Page({
     const that = this;
     setInterval(function () {
       that.refreshdata();
-    }, 1000);
+    }, 3000);
   },
   onLoad(options) {
     this.startInterval();
@@ -262,6 +262,13 @@ getUserOrder(){
       console.log('error')
     }
   })
-}
+},
+toOrderinfor(e){
+  const order_id = e.currentTarget.dataset.order_id
+  console.log('这是什么',order_id)
+  wx.navigateTo({
+    url: '/pages/order_infor/order_infor?order_id='+order_id,
+  })
+},
 
 });

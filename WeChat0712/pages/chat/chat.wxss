@@ -39,6 +39,7 @@
 .pub-button-with-text {
   color: #fff;
   background-color: #0099ff;
+  margin-right: 30px;
   border: solid 1rpx #7f7f7f;
   border-radius: 50rpx;
   padding: 10rpx 20rpx;
